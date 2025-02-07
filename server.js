@@ -1,45 +1,28 @@
 // Importation du module HTTP de Node.js pour l création de notre serveur
+import fs from "fs";
 import http from "http";
+import path from "path";
+import { fileURLToPath, pathToFileURL } from "url";
+import { router } from "./tools/router-manager.tools.js";
 
-// Repository
-let livres = [
-    {
-        id : 1,
-        titre : "toto",
-        auteur : "fullStack",
-        annee : 2025
-    },
-    {
-        id : 2,
-        titre : "tata",
-        auteur : "fullStack",
-        annee : 2025
-    }
-];
+// Import dynamique des routes
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const chargerRoutes = () => {
+    const routeDir = path.join(__dirname, "routers");
+    fs.readdirSync(routeDir)
+    .filter( file => file.endsWith(".js"))
+    .forEach(file => {
+        import(pathToFileURL(path.join(routeDir, file)));
+        console.log(`Route chargée => ${file}`);
+    })
+}
 
-// Service
-const getAllBookService = () => {
-    return livres;
-};
+const startServer = () => {
+    chargerRoutes();
+    const server  = http.createServer((req, res) => router.handleRequest(req, res));
+    const port = 3000;
+    server.listen(port, () => console.log(`Start serveur : http://localhost:${port}`));
+}
 
-
-// Controller 
-const getAllBookController = (req, res) => {
-    const livres = getAllBookService();
-    res.writeHead(200, { "Content-Type": "application/json"});
-    res.end(JSON.stringify(livres))
-};
-
-// Routage manuel
-const server =  http.createServer((req,res) => {
-
-    if (req.method === "GET" && req.url === "/livres"){
-        getAllBookController(req,res);
-    }
-});
-
-// Le serveur écoute les requêtes sur le 3000 et tourne en boucle indéfiniment
-server.listen(3000, () => {
-    console.log("Serveur démarré sur http://localhost:3000");
-});
+startServer();
