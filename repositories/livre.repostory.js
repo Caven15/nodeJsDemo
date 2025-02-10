@@ -1,3 +1,5 @@
+import Livre from "../models/livre.model.js"
+
 let livres = [
 	{
 		id : 1,
@@ -14,10 +16,34 @@ export const getAll = () => {
 }
 
 // getOne
+export const getOneById = (id) => {
+	return livres.find(livre => livre.id === Number(id) || null);
+}
 
 // Create
+export const create = (livre) => {
+	const newLivre = new Livre(
+		++id,
+		livre.titre,
+		livre.auteur,
+		livre.annee
+	);
+	livres.push(newLivre);
+	return newLivre;
+}
 
 // Update
+export const updateBook = (id, data) => {
+	console.log(`data : ${data}`);
+	const livre = livres.find(livre => livre.id === Number(id));
+	if (livre) {
+		Object.assign(livre, data);
+		console.log(`livre : ${data}`);
+		return livre; 
+	}
+	return null; 
+};
+
 
 // Delete
 export const deleteBook = (id) => {
