@@ -4,6 +4,8 @@ import http from "http";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { router } from "./tools/router-manager.tools.js";
+import db from "./models/index.js";
+const { sequelize } = db;
 
 // Import dynamique des routes
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,7 +20,14 @@ const chargerRoutes = () => {
     })
 }
 
-const startServer = () => {
+const startServer = async () => {
+    await sequelize.authenticate();
+    console.log("✅ Connexion à la base de donnée ok");
+
+    await sequelize.sync({alter : false});
+    console.log("✅ Modèle synchronisés avec succès !");
+
+
     chargerRoutes();
     const server  = http.createServer((req, res) => router.handleRequest(req, res));
     const port = 3000;

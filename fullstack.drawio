@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="hsqWSGGhF85fX5bLkPSP" name="Page-1">
-        <mxGraphModel dx="1173" dy="719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+        <mxGraphModel dx="810" dy="367" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -36,6 +36,9 @@
                         <mxPoint x="295.1600000000001" y="318.22" as="sourcePoint"/>
                         <mxPoint x="439.6400000000001" y="318.8800000000001" as="targetPoint"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Sequelize" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="320" width="70" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
