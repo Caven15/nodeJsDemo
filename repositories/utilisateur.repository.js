@@ -1,10 +1,6 @@
 import db from "../models/index.js";
 const { Utilisateur } = db;
 
-// 1. Créer un utilisateur (Create)
-export const create = async (data) => {
-    return await Utilisateur.create(data);
-};
 
 // 2. Récupérer tous les utilisateurs (Read All)
 export const getAll = async () => {
