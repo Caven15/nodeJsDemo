@@ -1,4 +1,4 @@
-import * as livreRepository from "../repositories/livre.repostory.js";
+import * as livreRepository from "../repositories/livre.repository.js";
 
 
 // getAll
@@ -29,6 +29,13 @@ export const updateBook = async (id,data) => {
 	if (isNaN(id) || id < 1) {
 		return "Id introuvable";
 	}
+
+	const livre = await livreRepository.getOneById(id);
+
+	if (!livre){
+		return "Livre non trouvé"
+	}
+
 	if (!data.titre && !data.auteur && !data.annee){
 		return "Au moins un chmap doit être mis a jour";
 	}
@@ -41,6 +48,14 @@ export const deleteBook = async (id) => {
 	if (isNaN(id) || id < 1){
 		return "Id invalide.";
 	}
+
+	const livre = await livreRepository.getOneById(id);
+
+	if (!livre){
+		return "Livre non trouvé"
+	}
+
+
 	const deleteBook = await livreRepository.deleteBook(id);
 	return deleteBook || "Livre non trouvé";
 }

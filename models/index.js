@@ -19,9 +19,10 @@ export const db = {};
 
 // import des modèles
 import Livre from "./livre.model.js";
+import Utilisateur from "./utilisateur.model.js";
 
 db.Livre = Livre(sequelize);
-
+db.Utilisateur = Utilisateur(sequelize);
 
 
 Object.keys(db).forEach((modelName) => {
